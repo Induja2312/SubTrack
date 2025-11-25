@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>SubTrack - Advisor</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="../pic1.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Custom Color Scheme -->
+  <style>
+    :root {
+      --beige-light: #FBF9F6;
+      --beige-card: #F1EDEA;
+      --brown-dark: #5D4037;
+      --brown-medium: #795548;
+      --brown-text: #A1887F;
+      --border: #E8E3DE;
+    }
+
+    body {
+      background-color: var(--beige-light) !important;
+      color: var(--brown-dark) !important;
+    }
+
+    .card {
+      background-color: var(--beige-card) !important;
+      border: 1px solid var(--border) !important;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .navbar {
+      background-color: var(--beige-card) !important;
+      border-bottom: 1px solid var(--border) !important;
+    }
+
+    .btn-primary {
+      background-color: var(--brown-dark) !important;
+      border-color: var(--brown-dark) !important;
+      color: white !important;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--brown-medium) !important;
+      border-color: var(--brown-medium) !important;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes tada {
+      0% { transform: scale(1) rotate(0deg); }
+      10%, 20% { transform: scale(0.9) rotate(-3deg); }
+      30%, 50%, 70%, 90% { transform: scale(1.1) rotate(3deg); }
+      40%, 60%, 80% { transform: scale(1.1) rotate(-3deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    @keyframes jiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-2deg); }
+      75% { transform: rotate(2deg); }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .animate-tada {
+      animation: tada 1s ease-in-out;
+    }
+
+    .animate-jiggle {
+      animation: jiggle 0.5s ease-in-out 3;
+    }
+
+    .advice-box {
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      border: 2px dashed var(--border);
+      background-color: var(--beige-light);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen">
+  <!-- NAVBAR -->
+  <div class="navbar bg-base-100 shadow-sm">
+    <div class="navbar-start">
+      <a href="index.html" class="btn btn-ghost text-xl flex items-center gap-2">
+        <img src="../pic1.png" alt="SubTrack Logo" class="w-8 h-8">
+        SubTrack
+      </a>
+    </div>
+    <div class="navbar-end">
+      <a href="index.html" class="btn btn-ghost">🏠 Home</a>
+      <a href="charts.html" class="btn btn-ghost">📊 Charts</a>
+      <a href="advisor.html" class="btn btn-primary">🤖 Advisor</a>
+      <button id="logoutBtn" class="btn btn-error">Logout</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="max-w-6xl mx-auto p-6">
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- FUN STATS CARD -->
+      <div class="card bg-base-100 shadow-xl p-6 animate-fade-in-up">
+        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+          📊 Fun Stats 🎉
+        </h2>
+        <div id="fun-stats" class="space-y-3">
+          <div class="text-center p-4" style="color: var(--brown-text);">
+            <div class="text-4xl mb-2">💸</div>
+            <p>Get advice to see your stats!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN ADVISOR CARD -->
+      <div class="card bg-base-100 shadow-xl p-8 animate-fade-in-up">
+        <div class="text-center mb-4">
+          <div class="text-6xl mb-2">🤖</div>
+          <h1 class="text-2xl font-bold" style="color: var(--brown-dark);">AI Financial Guru</h1>
+          <p class="text-sm" style="color: var(--brown-text);">Your brutally honest money mentor</p>
+        </div>
+        
+        <div class="text-center mb-6">
+          <button id="get-advice-btn" class="btn btn-primary btn-lg">✨ Get My Advice ✨</button>
+        </div>
+        
+        <div id="advice-message" class="advice-box">
+          <div class="text-center">
+            <div class="text-3xl mb-2">💭</div>
+            <p style="color: var(--brown-text);">Ready for some financial reality? Click above!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- MONEY TIPS CARD -->
+      <div class="card bg-base-100 shadow-xl p-6 animate-fade-in-up">
+        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+          💡 Quick Tips 🎯
+        </h2>
+        <div class="space-y-3">
+          <div class="p-3 rounded" style="background-color: var(--beige-light); border: 1px solid var(--border);">
+            <div class="text-lg mb-1">💰</div>
+            <p class="text-sm font-medium">Track every subscription</p>
+          </div>
+          <div class="p-3 rounded" style="background-color: var(--beige-light); border: 1px solid var(--border);">
+            <div class="text-lg mb-1">⏰</div>
+            <p class="text-sm font-medium">Set renewal reminders</p>
+          </div>
+          <div class="p-3 rounded" style="background-color: var(--beige-light); border: 1px solid var(--border);">
+            <div class="text-lg mb-1">🎯</div>
+            <p class="text-sm font-medium">Review monthly budgets</p>
+          </div>
+          <div class="p-3 rounded" style="background-color: var(--beige-light); border: 1px solid var(--border);">
+            <div class="text-lg mb-1">✂️</div>
+            <p class="text-sm font-medium">Cancel unused services</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./advisor.js" defer></script>
+</body>
+</html>

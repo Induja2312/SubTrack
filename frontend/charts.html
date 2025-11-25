@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>SubTrack - Charts</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="../pic1.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom Color Scheme -->
+  <style>
+    :root {
+      --beige-light: #FBF9F6;
+      --beige-card: #F1EDEA;
+      --brown-dark: #5D4037;
+      --brown-medium: #795548;
+      --brown-text: #A1887F;
+      --border: #E8E3DE;
+    }
+
+    body {
+      background-color: var(--beige-light) !important;
+      color: var(--brown-dark) !important;
+    }
+
+    .card {
+      background-color: var(--beige-card) !important;
+      border: 1px solid var(--border) !important;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .navbar {
+      background-color: var(--beige-card) !important;
+      border-bottom: 1px solid var(--border) !important;
+    }
+
+    .btn-primary {
+      background-color: var(--brown-dark) !important;
+      border-color: var(--brown-dark) !important;
+      color: white !important;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen">
+  <!-- NAVBAR -->
+  <div class="navbar bg-base-100 shadow-sm">
+    <div class="navbar-start">
+      <a href="index.html" class="btn btn-ghost text-xl flex items-center gap-2">
+        <img src="../pic1.png" alt="SubTrack Logo" class="w-8 h-8">
+        SubTrack
+      </a>
+    </div>
+    <div class="navbar-end">
+      <a href="index.html" class="btn btn-ghost">🏠 Home</a>
+      <a href="charts.html" class="btn btn-primary">📊 Charts</a>
+      <a href="advisor.html" class="btn btn-ghost">🤖 Advisor</a>
+      <button id="logoutBtn" class="btn btn-error">Logout</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="max-w-6xl mx-auto p-6">
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- CHART COLUMN -->
+      <div class="card bg-base-100 shadow-xl p-6 animate-fade-in-up">
+        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+          🍰 Spending Chart 📊
+        </h2>
+        <canvas id="chart"></canvas>
+        <div class="mt-4 p-3 rounded" style="background-color: var(--beige-light); border: 1px solid var(--border);">
+          <div class="text-center">
+            <span class="text-sm" style="color: var(--brown-text);">Total Monthly Spending</span>
+            <div id="total-spending" class="text-2xl font-bold" style="color: var(--brown-dark);">₹0.00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CATEGORY DETAILS COLUMN -->
+      <div class="card bg-base-100 shadow-xl p-6 animate-fade-in-up">
+        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+          📈 Category History 📜
+        </h2>
+        <div id="category-details-list" class="space-y-2">
+          <div class="text-center p-4" style="color: var(--brown-text);">
+            <div class="text-4xl mb-2">👁️</div>
+            <p>Click on a chart segment to explore that category!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./charts.js" defer></script>
+</body>
+</html>
