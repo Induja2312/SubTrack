@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>SubTrack - Assets</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="../pic1.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Custom Color Scheme -->
+  <style>
+    :root {
+      --beige-light: #FBF9F6;
+      --beige-card: #F1EDEA;
+      --brown-dark: #5D4037;
+      --brown-medium: #795548;
+      --brown-text: #A1887F;
+      --border: #E8E3DE;
+    }
+
+    body {
+      background-color: var(--beige-light) !important;
+      color: var(--brown-dark) !important;
+    }
+
+    .card {
+      background-color: var(--beige-card) !important;
+      border: 1px solid var(--border) !important;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .navbar {
+      background-color: var(--beige-card) !important;
+      border-bottom: 1px solid var(--border) !important;
+    }
+
+    .btn-primary {
+      background-color: var(--brown-dark) !important;
+      border-color: var(--brown-dark) !important;
+      color: white !important;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--brown-medium) !important;
+      border-color: var(--brown-medium) !important;
+    }
+
+    .btn-error {
+      background-color: #dc2626 !important;
+      border-color: #dc2626 !important;
+      color: white !important;
+    }
+
+    .input {
+      background-color: var(--beige-light) !important;
+      border-color: var(--border) !important;
+      color: var(--brown-dark) !important;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen">
+  <!-- NAVBAR -->
+  <div class="navbar bg-base-100 shadow-sm">
+    <div class="navbar-start">
+      <a href="index.html" class="btn btn-ghost text-xl flex items-center gap-2">
+        <img src="../pic1.png" alt="SubTrack Logo" class="w-8 h-8">
+        SubTrack
+      </a>
+    </div>
+    <div class="navbar-end">
+      <a href="index.html" class="btn btn-ghost">🏠 Home</a>
+      <a href="charts.html" class="btn btn-ghost">📊 Charts</a>
+      <a href="advisor.html" class="btn btn-ghost">🤖 Advisor</a>
+      <a href="assets.html" class="btn btn-primary">💎 Assets</a>
+      <button id="logoutBtn" class="btn btn-error">Logout</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="max-w-6xl mx-auto p-6">
+    <div class="grid md:grid-cols-3 gap-6 mb-6">
+      <!-- ADD ASSET CARD -->
+      <div class="card bg-base-100 shadow-xl p-6 animate-fade-in-up">
+        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+          💎 Add Asset 📈
+        </h2>
+        <form id="assetForm" class="space-y-2">
+          <input id="assetName" placeholder="Asset Name (e.g. Savings Account)" class="input input-bordered w-full" required>
+          <input id="assetValue" type="number" placeholder="Current Value" class="input input-bordered w-full" required>
+          <select id="assetType" class="input input-bordered w-full" required>
+            <option value="">Select Asset Type</option>
+            <option value="Cash">💰 Cash & Savings</option>
+            <option value="Investment">📈 Investments</option>
+            <option value="Property">🏠 Property</option>
+            <option value="Vehicle">🚗 Vehicle</option>
+            <option value="Other">📦 Other</option>
+          </select>
+          <input id="assetCurrency" placeholder="Currency (e.g. INR)" class="input input-bordered w-full" value="INR">
+          <button class="btn btn-primary w-full">💎 Add Asset</button>
+        </form>
+      </div>
+
+      <!-- TOTAL ASSETS CARD -->
+      <div class="card bg-base-100 shadow-xl p-6 animate-fade-in-up">
+        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+          💰 Total Assets 🎯
+        </h2>
+        <div class="text-center">
+          <div id="totalAssets" class="text-3xl font-bold mb-2" style="color: var(--brown-dark);">₹0.00</div>
+          <div class="text-sm" style="color: var(--brown-text);">Net Worth</div>
+        </div>
+        <div class="mt-4 space-y-2" id="assetBreakdown">
+          <div class="text-center" style="color: var(--brown-text);">
+            <div class="text-2xl mb-2">📊</div>
+            <p>Add assets to see breakdown</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ASSET GROWTH CARD -->
+      <div class="card bg-base-100 shadow-xl p-6 animate-fade-in-up">
+        <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+          📈 Asset Growth 🚀
+        </h2>
+        <div class="text-center">
+          <div class="text-sm mb-2" style="color: var(--brown-text);">This Month</div>
+          <div id="assetGrowth" class="text-2xl font-bold" style="color: var(--brown-medium);">+₹0.00</div>
+          <div class="text-xs mt-1" style="color: var(--brown-text);">Track changes manually</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASSET TILES -->
+    <div class="card bg-base-100 shadow-xl p-6 animate-fade-in-up">
+      <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">
+        💼 Your Assets Portfolio
+      </h2>
+      <div id="asset-tiles" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+  </div>
+
+  <!-- EDIT ASSET MODAL -->
+  <dialog id="editAssetModal" class="modal">
+    <div class="modal-box" style="background-color: var(--beige-card) !important;">
+      <h3 class="font-bold text-lg">Edit Asset</h3>
+      <form id="editAssetForm" class="space-y-2 mt-4">
+        <input id="editAssetId" type="hidden">
+        <input id="editAssetName" placeholder="Asset Name" class="input input-bordered w-full" required>
+        <input id="editAssetValue" type="number" placeholder="Current Value" class="input input-bordered w-full" required>
+        <select id="editAssetType" class="input input-bordered w-full" required>
+          <option value="Cash">💰 Cash & Savings</option>
+          <option value="Investment">📈 Investments</option>
+          <option value="Property">🏠 Property</option>
+          <option value="Vehicle">🚗 Vehicle</option>
+          <option value="Other">📦 Other</option>
+        </select>
+        <input id="editAssetCurrency" placeholder="Currency" class="input input-bordered w-full">
+        
+        <div class="modal-action">
+          <button type="button" class="btn" onclick="document.getElementById('editAssetModal').close()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="./assets.js" defer></script>
+</body>
+</html>

@@ -101,15 +101,23 @@ async function loadSubscriptions() {
     const tile = document.createElement("div");
     tile.style.animationDelay = `${index * 0.1}s`;
     tile.classList.add('animate-fade-in-up');
+    const isSubscription = s.renewalDate && s.renewalDate.trim() !== '';
+    const typeIcon = isSubscription ? '🔄' : '💸';
+    const typeLabel = isSubscription ? 'Subscription' : 'One-time Expense';
+    
     tile.innerHTML = `
       <div class="p-4 rounded-lg border transition-all duration-300 hover:shadow-lg hover:transform hover:scale-105" style="background-color: var(--beige-light); border-color: var(--border);">
         <div class="flex justify-between items-start mb-2">
-          <h3 class="font-semibold text-lg" style="color: var(--brown-dark);">${s.name}</h3>
+          <div class="flex items-center gap-2">
+            <span class="text-lg">${typeIcon}</span>
+            <h3 class="font-semibold text-lg" style="color: var(--brown-dark);">${s.name}</h3>
+          </div>
           <span class="font-bold text-xl" style="color: var(--brown-medium);">${s.currency || 'INR'} ${s.cost.toFixed(2)}</span>
         </div>
         <div class="mb-3">
           <p class="text-sm" style="color: var(--brown-text);">Category: ${s.category || "Other"}</p>
-          <p class="text-sm" style="color: var(--brown-text);">Renewal: ${s.renewalDate ? s.renewalDate.split('T')[0] : "Not set"}</p>
+          <p class="text-sm" style="color: var(--brown-text);">Type: ${typeLabel}</p>
+          ${isSubscription ? `<p class="text-sm" style="color: var(--brown-text);">Next Renewal: ${s.renewalDate.split('T')[0]}</p>` : ''}
         </div>
         <div class="flex gap-2">
           <button class="btn btn-ghost btn-sm animate-pulse-hover" onclick="openEditModal('${s._id}')">Edit</button>
@@ -191,12 +199,12 @@ function updateExpiringSoon(subs) {
   });
 
   if (expiringSubs.length === 0) {
-    expiringSoonList.innerHTML = '<div class="text-sm animate-fade-in-up" style="color: var(--brown-text);">No subscriptions expiring soon</div>';
+    expiringSoonList.innerHTML = '<div class="text-sm animate-fade-in-up" style="color: var(--brown-text);">No renewals due soon</div>';
   } else {
     expiringSoonList.innerHTML = expiringSubs.map((sub, index) => `
       <div class="p-2 rounded animate-fade-in-up" style="background-color: var(--beige-light); border: 1px solid var(--border); animation-delay: ${index * 0.1}s;">
         <div class="font-medium">${sub.name}</div>
-        <div class="text-sm" style="color: var(--brown-text);">Expires: ${sub.renewalDate.split('T')[0]}</div>
+        <div class="text-sm" style="color: var(--brown-text);">Renews: ${sub.renewalDate.split('T')[0]}</div>
       </div>
     `).join('');
   }

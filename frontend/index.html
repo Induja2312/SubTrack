@@ -195,6 +195,7 @@
       <a href="index.html" class="btn btn-primary">🏠 Home</a>
       <a href="charts.html" class="btn btn-ghost">📊 Charts</a>
       <a href="advisor.html" class="btn btn-ghost">🤖 Advisor</a>
+      <a href="assets.html" class="btn btn-ghost">💸 Assets</a>
       <button id="logoutBtn" class="btn btn-error hidden">Logout</button>
     </div>
   </div>
@@ -206,22 +207,25 @@
     <div id="app" class="space-y-6 hidden">
       <div class="grid md:grid-cols-3 gap-6">
         
-        <!-- ADD SUBSCRIPTION CARD -->
+        <!-- ADD EXPENSE/SUBSCRIPTION CARD -->
         <div class="card bg-base-100 shadow-xl p-6 md:col-span-1 animate-fade-in-up">
-          <h2 class="text-lg font-semibold mb-3 animate-pulse-hover">Add Subscription</h2>
+          <h2 class="text-lg font-semibold mb-3 animate-pulse-hover">💰 Add Expense</h2>
           <form id="subForm" class="space-y-2">
-            <input id="name" placeholder="Name" class="input input-bordered w-full" required>
+            <input id="name" placeholder="Name (e.g. Netflix, Groceries)" class="input input-bordered w-full" required>
             <input id="cost" type="number" placeholder="Cost" class="input input-bordered w-full" required>
-            <input id="category" placeholder="Category" class="input input-bordered w-full">
-            <input id="renewalDate" type="date" class="input input-bordered w-full">
+            <input id="category" placeholder="Category (e.g. Entertainment, Food)" class="input input-bordered w-full">
+            <input id="renewalDate" type="date" class="input input-bordered w-full" placeholder="Renewal Date (optional)">
             <input id="currency" placeholder="Currency (e.g. INR)" class="input input-bordered w-full" value="INR">
-            <button class="btn btn-primary w-full">Add Subscription</button>
+            <button class="btn btn-primary w-full">💸 Add Expense</button>
           </form>
+          <div class="mt-2 text-xs" style="color: var(--brown-text);">
+            💡 Leave renewal date empty for one-time expenses
+          </div>
         </div>
 
         <!-- EXPIRING SOON CARD -->
         <div class="card bg-base-100 shadow-xl p-6 md:col-span-1 animate-fade-in-up">
-          <h2 class="text-lg font-semibold mb-3 animate-pulse-hover">Expiring Soon</h2>
+          <h2 class="text-lg font-semibold mb-3 animate-pulse-hover">⏰ Renewals Due</h2>
           <div id="expiringSoonList" class="space-y-2">
             <div class="text-sm" style="color: var(--brown-text);">No subscriptions expiring soon</div>
           </div>
@@ -265,9 +269,9 @@
         </div>
       </div>
 
-      <!-- SUBSCRIPTION TILES -->
+      <!-- EXPENSE TILES -->
       <div class="card bg-base-100 shadow-xl p-6 animate-fade-in-up">
-        <h2 class="text-lg font-semibold mb-3 animate-pulse-hover">Your Subscriptions</h2>
+        <h2 class="text-lg font-semibold mb-3 animate-pulse-hover">📋 Your Expenses</h2>
         <div id="subscription-tiles" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
       </div>
     </div>
@@ -282,7 +286,7 @@
         <input id="editName" placeholder="Name" class="input input-bordered w-full" required>
         <input id="editCost" type="number" placeholder="Cost" class="input input-bordered w-full" required>
         <input id="editCategory" placeholder="Category" class="input input-bordered w-full">
-        <input id="editRenewalDate" type="date" class="input input-bordered w-full">
+        <input id="editRenewalDate" type="date" class="input input-bordered w-full" placeholder="Renewal Date (leave empty for one-time expense)">
         <input id="editCurrency" placeholder="Currency (e.g. INR)" class="input input-bordered w-full">
         
         <div class="modal-action">

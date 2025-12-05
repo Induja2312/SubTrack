@@ -5,6 +5,7 @@ import connectDB from "./config/db.js";
 import subscriptionRoutes from "./routes/subscriptionRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import aiRoutes from "./routes/aiRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,7 @@ connectDB();
 app.use("/api/auth", authRoutes);
 app.use("/api/subscriptions", subscriptionRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/ai", aiRoutes);
 
 app.get("/", (req, res) => res.send("SubTrack API running..."));
 
