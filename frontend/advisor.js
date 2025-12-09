@@ -195,7 +195,8 @@ document.getElementById("get-advice-btn").addEventListener("click", async () => 
     
   } catch (error) {
     console.error('Error:', error);
-    adviceBox.innerHTML = '<div class="text-center"><div class="text-3xl mb-2">⚠️</div><p style="color: var(--brown-text);">AI is taking a coffee break! Try again in a moment.</p></div>';
+    const errorMsg = error.message || 'AI is taking a coffee break! Try again in a moment.';
+    adviceBox.innerHTML = `<div class="text-center"><div class="text-3xl mb-2">⚠️</div><p style="color: var(--brown-text);">${errorMsg}</p></div>`;
     adviceBox.classList.add('animate-jiggle');
     
     button.disabled = false;
